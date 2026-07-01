@@ -1,0 +1,53 @@
+#------------------------------------------------
+# © 2026 Remus Rigo
+#    2026-06-18
+#------------------------------------------------
+
+#------------------------------------------------
+# My ignored files
+#
+[Ss]ync.*
+*.psd
+
+#------------------------------------------------
+# Common ignored files
+*.bak
+*.log
+*.tmp
+
+#------------------------------------------------
+# Common compiler ignored files
+[Bb]in
+[Oo]bj
+
+#------------------------------------------------
+# Windows ignored files
+#
+[Dd]esktop.ini
+[Tt]humbs.db
+
+#------------------------------------------------
+# Delphi ignored files
+#
+[Bb]in
+[Oo]bj
+__history
+__recovery
+*.dproj.local
+*.dsk
+*.dsv
+*.groupproj.local
+*.identcache
+*.tvsconfig
+
+#------------------------------------------------
+# Lazarus
+#
+*.lps
+
+#------------------------------------------------
+# Visual Studio
+#
+.vs/
+[Bb]in
+[Oo]bj
