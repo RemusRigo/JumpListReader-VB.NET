@@ -1,4 +1,10 @@
-﻿Imports System.IO
+﻿'--------------------------------------------------------------------------------------------------
+' Jump List reader
+'    © 2026 Remus Rigo
+'       v1.0 2026-07-01
+'--------------------------------------------------------------------------------------------------
+
+Imports System.IO
 Imports System.Runtime
 Imports System.Runtime.InteropServices
 Imports System.Windows.Forms.Design.AxImporter
@@ -8,8 +14,7 @@ Public Class frmJLReader
 
    Private pbLoad As rrProgressBar
 
-   'Dim grp As ListViewGroup = Nothing
-   'Dim log As New Logger(appName)
+   Dim log As New Logger(appName)
 
    Dim pathAD As String = Path.Combine(Environment.GetEnvironmentVariable("appdata"), "Microsoft\Windows\Recent\AutomaticDestinations")
    Dim pathCD As String = Path.Combine(Environment.GetEnvironmentVariable("appdata"), "Microsoft\Windows\Recent\CustomDestinations")
@@ -20,6 +25,7 @@ Public Class frmJLReader
    End Function
 
    Private Sub frmJLReader_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+      Me.Text = appTitle
       lvJLView.View = View.Details
       lvJLView.FullRowSelect = True
       lvJLView.Columns.Add("File Name", 250)
