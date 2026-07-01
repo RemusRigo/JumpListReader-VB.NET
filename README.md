@@ -1,6 +1,6 @@
-# SysOptimizer
+# Jump List Reader
 
-A Windows utility that optimizes the system
+A Windows utility that reads Jump List files
 
 
 
@@ -13,7 +13,7 @@ A Windows utility that optimizes the system
 
 ## Installation
 
-Just run SysOptimizer.exe
+Just run JumpListReader.exe
 
 
 
@@ -33,5 +33,5 @@ Just run SysOptimizer.exe
 
 ## Roadmap
 
-* 
-* 2026-06-25: Project started
+* 2026-07-01: Build UI + load files
+* 2026-07-01: Project started
