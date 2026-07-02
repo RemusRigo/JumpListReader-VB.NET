@@ -19,17 +19,35 @@ Public Class frmJLReader
    Dim pathAD As String = Path.Combine(Environment.GetEnvironmentVariable("appdata"), "Microsoft\Windows\Recent\AutomaticDestinations")
    Dim pathCD As String = Path.Combine(Environment.GetEnvironmentVariable("appdata"), "Microsoft\Windows\Recent\CustomDestinations")
 
+   '===============================================================================================
    Public Function DarkenColor(c As Color, percent As Integer) As Color
       Dim factor As Double = (100 - percent) / 100.0
       Return Color.FromArgb(c.A, CInt(c.R * factor), CInt(c.G * factor), CInt(c.B * factor))
    End Function
 
+   '===============================================================================================
+   ' FormatBytes: Converts a byte count into a human-readable string with appropriate units
+   Private Function FormatBytes(b As Long) As String
+      If b >= 1073741824L Then
+         Return String.Format("{0:F2} GB", b / 1073741824.0R)
+      ElseIf b >= 1048576L Then
+         Return String.Format("{0:F2} MB", b / 1048576.0R)
+      ElseIf b >= 1024L Then
+         Return String.Format("{0:F1} KB", b / 1024.0R)
+      Else
+         Return String.Format("{0} B", b)
+      End If
+   End Function
+
+   '===============================================================================================
    Private Sub frmJLReader_Load(sender As Object, e As EventArgs) Handles MyBase.Load
       Me.Text = appTitle
       lvJLView.View = View.Details
       lvJLView.FullRowSelect = True
       lvJLView.Columns.Add("File Name", 250)
-      lvJLView.Columns.Add("Full Path", 500)
+      lvJLView.Columns.Add("App ID", 100)
+      lvJLView.Columns.Add("Size", 100)
+      lvJLView.Columns.Add("Modified", 150)
 
       pbLoad = New rrProgressBar()
       pbLoad.Dock = DockStyle.None
@@ -72,7 +90,11 @@ Public Class frmJLReader
          Dim ext As String = Path.GetExtension(f).ToLower()
 
          Dim item As New ListViewItem(name)
-         item.SubItems.Add(f)
+         Dim fi As New FileInfo(f)
+         'App ID
+         item.SubItems.Add(AppID.GetAppByID(Path.GetFileNameWithoutExtension(f)))  ' Use the revised function name
+         item.SubItems.Add(FormatBytes(fi.Length))
+         item.SubItems.Add(fi.LastWriteTime.ToString("yyyy-MM-dd HH:mm:ss"))
          item.Tag = f   ' store full path for next steps
          If ext = ".automaticdestinations-ms" Then
             item.Group = grpAD
