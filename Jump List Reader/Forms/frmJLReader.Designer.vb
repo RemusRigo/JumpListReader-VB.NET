@@ -27,8 +27,10 @@ Partial Class frmJLReader
       btnScan = New Button()
       SplitContainer = New SplitContainer()
       lvJLView = New ListView()
+      lvDetails = New ListView()
       CType(SplitContainer, ComponentModel.ISupportInitialize).BeginInit()
       SplitContainer.Panel1.SuspendLayout()
+      SplitContainer.Panel2.SuspendLayout()
       SplitContainer.SuspendLayout()
       SuspendLayout()
       ' 
@@ -55,7 +57,7 @@ Partial Class frmJLReader
       ' btnScan
       ' 
       btnScan.Anchor = AnchorStyles.Bottom Or AnchorStyles.Right
-      btnScan.Location = New Point(988, 428)
+      btnScan.Location = New Point(1190, 458)
       btnScan.Name = "btnScan"
       btnScan.Size = New Size(42, 20)
       btnScan.TabIndex = 3
@@ -64,37 +66,58 @@ Partial Class frmJLReader
       ' 
       ' SplitContainer
       ' 
+      SplitContainer.Anchor = AnchorStyles.Top Or AnchorStyles.Bottom Or AnchorStyles.Left Or AnchorStyles.Right
+      SplitContainer.FixedPanel = FixedPanel.Panel1
       SplitContainer.Location = New Point(1, 20)
       SplitContainer.Name = "SplitContainer"
       ' 
       ' SplitContainer.Panel1
       ' 
       SplitContainer.Panel1.Controls.Add(lvJLView)
-      SplitContainer.Size = New Size(1027, 404)
+      ' 
+      ' SplitContainer.Panel2
+      ' 
+      SplitContainer.Panel2.Controls.Add(lvDetails)
+      SplitContainer.Size = New Size(1229, 434)
       SplitContainer.SplitterDistance = 580
       SplitContainer.TabIndex = 4
       ' 
       ' lvJLView
       ' 
       lvJLView.Dock = DockStyle.Fill
+      lvJLView.FullRowSelect = True
       lvJLView.Location = New Point(0, 0)
       lvJLView.Name = "lvJLView"
-      lvJLView.Size = New Size(580, 404)
+      lvJLView.Size = New Size(580, 434)
       lvJLView.TabIndex = 1
       lvJLView.UseCompatibleStateImageBehavior = False
+      lvJLView.View = View.Details
+      ' 
+      ' lvDetails
+      ' 
+      lvDetails.Dock = DockStyle.Fill
+      lvDetails.FullRowSelect = True
+      lvDetails.Location = New Point(0, 0)
+      lvDetails.Name = "lvDetails"
+      lvDetails.Size = New Size(645, 434)
+      lvDetails.TabIndex = 0
+      lvDetails.UseCompatibleStateImageBehavior = False
+      lvDetails.View = View.Details
       ' 
       ' frmJLReader
       ' 
       AutoScaleDimensions = New SizeF(7F, 15F)
       AutoScaleMode = AutoScaleMode.Font
-      ClientSize = New Size(1032, 451)
+      ClientSize = New Size(1234, 481)
       Controls.Add(SplitContainer)
       Controls.Add(btnScan)
       Controls.Add(chkBoxCD)
       Controls.Add(chkBoxAD)
       Name = "frmJLReader"
+      StartPosition = FormStartPosition.CenterScreen
       Text = "Jump List Reader"
       SplitContainer.Panel1.ResumeLayout(False)
+      SplitContainer.Panel2.ResumeLayout(False)
       CType(SplitContainer, ComponentModel.ISupportInitialize).EndInit()
       SplitContainer.ResumeLayout(False)
       ResumeLayout(False)
@@ -105,5 +128,6 @@ Partial Class frmJLReader
    Friend WithEvents btnScan As Button
    Friend WithEvents SplitContainer As SplitContainer
    Friend WithEvents lvJLView As ListView
+   Friend WithEvents lvDetails As ListView
 
 End Class

@@ -49,6 +49,15 @@ Public Class frmJLReader
       lvJLView.Columns.Add("Size", 100)
       lvJLView.Columns.Add("Modified", 150)
 
+      lvDetails.View = View.Details
+      lvDetails.FullRowSelect = True
+      lvDetails.Columns.Add("#", 30)
+      lvDetails.Columns.Add("Name", 100)
+      lvDetails.Columns.Add("Path", 300)
+      lvDetails.Columns.Add("Arg", 150)
+      lvDetails.Columns.Add("Description", 250)
+      lvDetails.Columns.Add("Last Access Time", 150)
+
       pbLoad = New rrProgressBar()
       pbLoad.Dock = DockStyle.None
       pbLoad.Anchor = AnchorStyles.Bottom Or AnchorStyles.Left Or AnchorStyles.Right
@@ -108,4 +117,34 @@ Public Class frmJLReader
       lvJLView.AutoResizeColumns(ColumnHeaderAutoResizeStyle.ColumnContent)
    End Sub
 
+   Private Sub lvJLView_SelectedIndexChanged(sender As Object, e As EventArgs) Handles lvJLView.SelectedIndexChanged
+      If lvJLView.SelectedItems.Count = 0 Then Exit Sub
+
+      Dim item = lvJLView.SelectedItems(0)
+      Dim jlFile As String = item.Tag.ToString()
+      'MessageBox.Show(jlFile)
+      lvDetails.Items.Clear()
+      Try
+         Dim cnt As Integer = 0
+         Dim jlEntries = parseJumpList.ReadJumpList(jlFile)
+         MessageBox.Show(jlEntries.Count.ToString())
+         For Each jl In jlEntries
+            MessageBox.Show(jl.StreamName)
+            cnt += 1
+            Dim li As New ListViewItem(cnt.ToString)
+            li.SubItems.Add(jl.StreamName)
+            li.SubItems.Add(jl.TargetPath)
+            li.SubItems.Add(jl.Arguments)
+            li.SubItems.Add(jl.Description)
+            li.SubItems.Add(jl.LastAccessTime.ToString("yyyy-MM-dd HH:mm:ss"))
+            lvDetails.Items.Add(li)
+         Next
+      Catch ex As Exception
+
+      End Try
+   End Sub
+
+   Private Sub lvJLView_MouseDoubleClick(sender As Object, e As MouseEventArgs) Handles lvJLView.MouseDoubleClick
+
+   End Sub
 End Class
