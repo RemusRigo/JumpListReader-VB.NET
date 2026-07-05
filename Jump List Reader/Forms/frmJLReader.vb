@@ -101,7 +101,7 @@ Public Class frmJLReader
          Dim item As New ListViewItem(name)
          Dim fi As New FileInfo(f)
          'App ID
-         item.SubItems.Add(AppID.GetAppByID(Path.GetFileNameWithoutExtension(f)))  ' Use the revised function name
+         item.SubItems.Add(GetAppByID(Path.GetFileNameWithoutExtension(f)))  ' Use the revised function name
          item.SubItems.Add(FormatBytes(fi.Length))
          item.SubItems.Add(fi.LastWriteTime.ToString("yyyy-MM-dd HH:mm:ss"))
          item.Tag = f   ' store full path for next steps
@@ -114,6 +114,7 @@ Public Class frmJLReader
 
          pbLoad.Value += 1
       Next
+      'lvJLView.AutoResizeColumns(ColumnHeaderAutoResizeStyle.HeaderSize)
       lvJLView.AutoResizeColumns(ColumnHeaderAutoResizeStyle.ColumnContent)
    End Sub
 
@@ -122,29 +123,54 @@ Public Class frmJLReader
 
       Dim item = lvJLView.SelectedItems(0)
       Dim jlFile As String = item.Tag.ToString()
-      'MessageBox.Show(jlFile)
+
       lvDetails.Items.Clear()
       Try
          Dim cnt As Integer = 0
          Dim jlEntries = parseJumpList.ReadJumpList(jlFile)
-         MessageBox.Show(jlEntries.Count.ToString())
          For Each jl In jlEntries
-            MessageBox.Show(jl.StreamName)
             cnt += 1
             Dim li As New ListViewItem(cnt.ToString)
             li.SubItems.Add(jl.StreamName)
             li.SubItems.Add(jl.TargetPath)
             li.SubItems.Add(jl.Arguments)
             li.SubItems.Add(jl.Description)
-            li.SubItems.Add(jl.LastAccessTime.ToString("yyyy-MM-dd HH:mm:ss"))
+            li.SubItems.Add(If(jl.LastAccessTime.HasValue, jl.LastAccessTime.Value.ToString("yyyy-MM-dd HH:mm:ss"), ""))
             lvDetails.Items.Add(li)
          Next
       Catch ex As Exception
-
+         log.Msg.Error("Error reading Jump List file: " & jlFile & vbCrLf & ex.Message)
       End Try
+      lvDetails.AutoResizeColumns(ColumnHeaderAutoResizeStyle.ColumnContent)
    End Sub
 
    Private Sub lvJLView_MouseDoubleClick(sender As Object, e As MouseEventArgs) Handles lvJLView.MouseDoubleClick
 
+   End Sub
+
+   Private Sub lvJLView_KeyDown(sender As Object, e As KeyEventArgs) Handles lvJLView.KeyDown
+      ' Ctrl+C to copy selected items to clipboard
+      If e.Control AndAlso e.KeyCode = Keys.C Then
+         If lvJLView.SelectedItems.Count > 0 Then
+            Dim sb As New System.Text.StringBuilder()
+
+            For Each item As ListViewItem In lvJLView.SelectedItems
+               Dim fields As New List(Of String)()
+               For Each sub_ As ListViewItem.ListViewSubItem In item.SubItems
+                  fields.Add(sub_.Text)
+               Next
+               sb.AppendLine(String.Join(vbTab, fields))
+            Next
+
+            Try
+               Clipboard.SetText(sb.ToString())
+            Catch ex As Exception
+               MessageBox.Show("Could not copy to clipboard: " & ex.Message)
+            End Try
+         End If
+
+         e.Handled = True
+         e.SuppressKeyPress = True
+      End If
    End Sub
 End Class
