@@ -25,9 +25,9 @@ Just run JumpListReader.exe
 
 ## Statistics
 
-!\[status](https://img.shields.io/badge/status-in%20progress-orange)
+![status](https://img.shields.io/badge/status-in%20progress-orange)
 <br>
-!\[GitHub Downloads (all assets, all releases)](https://img.shields.io/github/downloads/RemusRigo/SysOptimizer-VB.NET/total)
+![GitHub Downloads (all assets, all releases)](https://img.shields.io/github/downloads/RemusRigo/SysOptimizer-VB.NET/total)
 
 
 
@@ -41,6 +41,6 @@ Just run JumpListReader.exe
 
 ## References
 
-* !\[openMCDF](https://github.com/openmcdf/openmcdf)
-* !\[EricZimmerman: Jump List AppID](https://github.com/EricZimmerman/JumpList/blob/master/JumpList/Resources/AppIDs.txt)
+* ![openMCDF](https://github.com/openmcdf/openmcdf)
+* ![EricZimmerman: Jump List AppID](https://github.com/EricZimmerman/JumpList/blob/master/JumpList/Resources/AppIDs.txt)
 
