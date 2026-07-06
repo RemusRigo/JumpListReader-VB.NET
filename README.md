@@ -41,6 +41,6 @@ Just run JumpListReader.exe
 
 ## References
 
-* ![openMCDF](https://github.com/openmcdf/openmcdf)
-* ![EricZimmerman: Jump List AppID](https://github.com/EricZimmerman/JumpList/blob/master/JumpList/Resources/AppIDs.txt)
+* [openMCDF](https://github.com/openmcdf/openmcdf)
+* [EricZimmerman: Jump List AppID](https://github.com/EricZimmerman/JumpList/blob/master/JumpList/Resources/AppIDs.txt)
 
