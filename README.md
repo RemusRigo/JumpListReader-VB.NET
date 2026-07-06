@@ -25,13 +25,22 @@ Just run JumpListReader.exe
 
 ## Statistics
 
-![status](https://img.shields.io/badge/status-in%20progress-orange)
+!\[status](https://img.shields.io/badge/status-in%20progress-orange)
 <br>
-![GitHub Downloads (all assets, all releases)](https://img.shields.io/github/downloads/RemusRigo/SysOptimizer-VB.NET/total)
+!\[GitHub Downloads (all assets, all releases)](https://img.shields.io/github/downloads/RemusRigo/SysOptimizer-VB.NET/total)
 
 
 
 ## Roadmap
 
+* 2026-07-06: Fix: use openMCDF instead of OLE container
 * 2026-07-01: Build UI + load files
 * 2026-07-01: Project started
+
+
+
+## References
+
+* !\[openMCDF](https://github.com/openmcdf/openmcdf)
+* !\[EricZimmerman: Jump List AppID](https://github.com/EricZimmerman/JumpList/blob/master/JumpList/Resources/AppIDs.txt)
+
