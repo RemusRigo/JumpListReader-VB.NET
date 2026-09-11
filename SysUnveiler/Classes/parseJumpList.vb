@@ -1,4 +1,9 @@
-Imports System
+'--------------------------------------------------------------------------------------------------
+' Jump List Parser
+'    © 2026 Remus Rigo
+'       v1.0.20260705
+'--------------------------------------------------------------------------------------------------
+
 Imports System.IO
 Imports System.Collections.Generic
 Imports System.Globalization

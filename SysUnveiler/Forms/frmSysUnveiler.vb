@@ -35,13 +35,14 @@ Public Class frmSysUnveiler
       Me.Location = New Point(13, 13)
       lstBoxActions.Items.Clear()
       lstBoxActions.Items.Add("Jump Lists")
+      If IsAppElevated() Then lstBoxActions.Items.Add("Task Scheduler")
    End Sub
 
    '===============================================================================================
    Private Sub lstBoxActions_DoubleClick(sender As Object, e As EventArgs) Handles lstBoxActions.DoubleClick
       Select Case lstBoxActions.SelectedItem.ToString()
-         Case "Jump Lists"
-            frmJLReader.Show()
+         Case "Jump Lists" : frmJumpListReader.Show()
+         Case "Task Scheduler" : frmTaskSchedulerReader.Show()
       End Select
    End Sub
 

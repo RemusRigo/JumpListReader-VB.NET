@@ -5,10 +5,9 @@
 '--------------------------------------------------------------------------------------------------
 
 Imports System.IO
+Imports System.Windows.Forms.VisualStyles.VisualStyleElement
 
-Public Class frmJLReader
-
-   Private pbLoad As rrProgressBar
+Public Class frmJumpListReader
 
    Dim log As New Logger(appName)
 
@@ -37,7 +36,9 @@ Public Class frmJLReader
 
    '===============================================================================================
    Private Sub frmJLReader_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+
       Me.Text = "Jump List reader v1.1.20260911"
+
       lvJLView.View = View.Details
       lvJLView.FullRowSelect = True
       lvJLView.Columns.Add("File Name", 250)
@@ -48,22 +49,19 @@ Public Class frmJLReader
       lvDetails.View = View.Details
       lvDetails.FullRowSelect = True
       lvDetails.Columns.Add("#", 30)
-      lvDetails.Columns.Add("Hex#", 100)
       lvDetails.Columns.Add("Path", 300)
       lvDetails.Columns.Add("Arg", 150)
       lvDetails.Columns.Add("Description", 250)
       lvDetails.Columns.Add("Last Access Time", 150)
 
-      pbLoad = New rrProgressBar()
-      pbLoad.Dock = DockStyle.None
-      pbLoad.Anchor = AnchorStyles.Bottom Or AnchorStyles.Left Or AnchorStyles.Right
-      pbLoad.Location = New Point(3, Me.ClientSize.Height - pbLoad.Height - 3)
-      pbLoad.Size = New Size(Me.ClientSize.Width - btnScan.Width - 6, 20)
-      'pbLoad.BarColor = DarkenColor(tvOptions.BackColor, 15)
-      'pbLoad.BarColorDone = DarkenColor(tvOptions.BackColor, 30)
-      Me.Controls.Add(pbLoad)
-
-
+      ' load default paths
+      If Directory.Exists(pathAD) Then
+         txtBoxAD.Text = pathAD
+      Else
+      End If
+      If Directory.Exists(pathCD) Then
+         txtBoxCD.Text = pathCD
+      End If
    End Sub
 
    '========================================================================================================================
@@ -73,18 +71,15 @@ Public Class frmJLReader
       Dim files As New List(Of String)
 
       ' AutomaticDestinations ---------------------------------------------------------------------
-      If chkBoxAD.Checked AndAlso Directory.Exists(pathAD) Then
+      If chkBoxAD.Checked Then
          'lvJLView.Items.Add(Path.GetFileName(file))
-         files.AddRange(Directory.GetFiles(pathAD, "*.automaticDestinations-ms"))
+         files.AddRange(Directory.GetFiles(txtBoxAD.Text, "*.automaticDestinations-ms"))
       End If
 
       ' Custom Destinations -----------------------------------------------------------------------
       If chkBoxCD.Checked AndAlso Directory.Exists(pathCD) Then
-         files.AddRange(Directory.GetFiles(pathCD, "*.customDestinations-ms"))
+         files.AddRange(Directory.GetFiles(txtBoxCD.Text, "*.customDestinations-ms"))
       End If
-
-      pbLoad.Maximum = files.Count
-      pbLoad.Value = 0
 
       Dim grpAD = New ListViewGroup("Automatic Destinations")
       lvJLView.Groups.Add(grpAD)
@@ -93,7 +88,7 @@ Public Class frmJLReader
 
       For Each f In files
          Dim name = Path.GetFileName(f)
-         Dim ext As String = Path.GetExtension(f).ToLower()
+         Dim ext = Path.GetExtension(f).ToLower
 
          Dim item As New ListViewItem(name)
          Dim fi As New FileInfo(f)
@@ -108,11 +103,9 @@ Public Class frmJLReader
             item.Group = grpCD
          End If
          lvJLView.Items.Add(item)
-
-         pbLoad.Value += 1
       Next
       'lvJLView.AutoResizeColumns(ColumnHeaderAutoResizeStyle.HeaderSize)
-      lvJLView.AutoResizeColumns(ColumnHeaderAutoResizeStyle.ColumnContent)
+      'lvJLView.AutoResizeColumns(ColumnHeaderAutoResizeStyle.ColumnContent)
    End Sub
 
    '===============================================================================================
@@ -125,12 +118,9 @@ Public Class frmJLReader
       Dim jlFile As String = item.Tag.ToString()
 
       Try
-         Dim cnt As Integer = 0
          Dim jlEntries = parseJumpList.ReadJumpList(jlFile)
          For Each jl In jlEntries
-            cnt += 1
-            Dim li As New ListViewItem(cnt.ToString)
-            li.SubItems.Add(jl.StreamName)
+            Dim li As New ListViewItem(jl.StreamName)
             li.SubItems.Add(jl.TargetPath)
             li.SubItems.Add(jl.Arguments)
             li.SubItems.Add(jl.Description)
@@ -143,10 +133,8 @@ Public Class frmJLReader
       'lvDetails.AutoResizeColumns(ColumnHeaderAutoResizeStyle.ColumnContent)
    End Sub
 
-   Private Sub lvJLView_MouseDoubleClick(sender As Object, e As MouseEventArgs) Handles lvJLView.MouseDoubleClick
-
-   End Sub
-
+   '===============================================================================================
+   ' lvJLView: KeyDown
    Private Sub lvJLView_KeyDown(sender As Object, e As KeyEventArgs) Handles lvJLView.KeyDown
       ' Ctrl+C to copy selected items to clipboard
       If e.Control AndAlso e.KeyCode = Keys.C Then
@@ -167,9 +155,28 @@ Public Class frmJLReader
                MessageBox.Show("Could not copy to clipboard: " & ex.Message)
             End Try
          End If
-
          e.Handled = True
          e.SuppressKeyPress = True
       End If
+   End Sub
+
+   '===============================================================================================
+   ' Browse Automatic Destinations folder
+   Private Sub btnBrowseAD_Click(sender As Object, e As EventArgs) Handles btnBrowseAD.Click
+      Using dlgFolderBrowser As New FolderBrowserDialog()
+         dlgFolderBrowser.Description = "Select Automatic Destinations folder"
+         dlgFolderBrowser.ShowNewFolderButton = True
+         If dlgFolderBrowser.ShowDialog() = DialogResult.OK Then txtBoxAD.Text = dlgFolderBrowser.SelectedPath
+      End Using
+   End Sub
+
+   '===============================================================================================
+   ' Browse Custom Destinations folder
+   Private Sub btnBrowseCD_Click(sender As Object, e As EventArgs) Handles btnBrowseCD.Click
+      Using dlgFolderBrowser As New FolderBrowserDialog()
+         dlgFolderBrowser.Description = "Select Custom Destinations folder"
+         dlgFolderBrowser.ShowNewFolderButton = True
+         If dlgFolderBrowser.ShowDialog() = DialogResult.OK Then txtBoxCD.Text = dlgFolderBrowser.SelectedPath
+      End Using
    End Sub
 End Class

@@ -22,12 +22,14 @@ Partial Class frmSysUnveiler
    'Do not modify it using the code editor.
    <System.Diagnostics.DebuggerStepThrough()> _
    Private Sub InitializeComponent()
+      Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmSysUnveiler))
       lstBoxActions = New ListBox()
       SuspendLayout()
       ' 
       ' lstBoxActions
       ' 
       lstBoxActions.BackColor = SystemColors.ActiveBorder
+      lstBoxActions.BorderStyle = BorderStyle.FixedSingle
       lstBoxActions.Dock = DockStyle.Fill
       lstBoxActions.Font = New Font("Segoe UI", 9F, FontStyle.Bold)
       lstBoxActions.ForeColor = SystemColors.ActiveCaptionText
@@ -43,6 +45,7 @@ Partial Class frmSysUnveiler
       AutoScaleMode = AutoScaleMode.Font
       ClientSize = New Size(284, 386)
       Controls.Add(lstBoxActions)
+      Icon = CType(resources.GetObject("$this.Icon"), Icon)
       MaximizeBox = False
       MinimizeBox = False
       Name = "frmSysUnveiler"

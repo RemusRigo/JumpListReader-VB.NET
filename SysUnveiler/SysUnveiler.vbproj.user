@@ -4,16 +4,19 @@
     <ActiveDebugFramework>net10.0-windows</ActiveDebugFramework>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Update="Classes\frmAbout.vb">
+    <Compile Update="Forms\frmAbout.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="Forms\frmJLReader.vb">
+    <Compile Update="Forms\frmJumpListReader.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="Classes\rrProgressBar.vb">
       <SubType>Component</SubType>
     </Compile>
     <Compile Update="Forms\frmSysUnveiler.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Forms\frmTaskSchedulerReader.vb">
       <SubType>Form</SubType>
     </Compile>
   </ItemGroup>
