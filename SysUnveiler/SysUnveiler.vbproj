@@ -1,0 +1,82 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>SysUnveiler</RootNamespace>
+    <StartupObject>SysUnveiler.My.MyApplication</StartupObject>
+    <UseWindowsForms>true</UseWindowsForms>
+    <MyType>WindowsForms</MyType>
+  </PropertyGroup>
+
+   <PropertyGroup>
+      <Platforms>x64;x86</Platforms>
+      <TargetFrameworks>net8.0-windows;net10.0-windows</TargetFrameworks>
+      <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+      <BaseOutputPath>..\bin\</BaseOutputPath>
+      <BaseIntermediateOutputPath>obj\</BaseIntermediateOutputPath>
+   </PropertyGroup>
+
+   <PropertyGroup Condition="'$(TargetFramework)'=='net8.0-windows' AND '$(Configuration)|$(Platform)'=='Debug|x86'">
+      <OutputPath>..\bin\Debug\net8.0 x86\</OutputPath>
+      <IntermediateOutputPath>obj\Debug\net8.0 x86\</IntermediateOutputPath>
+   </PropertyGroup>
+   <PropertyGroup Condition="'$(TargetFramework)'=='net8.0-windows' AND '$(Configuration)|$(Platform)'=='Debug|x64'">
+      <OutputPath>..\bin\Debug\net8.0 x64\</OutputPath>
+      <IntermediateOutputPath>obj\Debug\net8.0 x86\</IntermediateOutputPath>
+   </PropertyGroup>
+   <PropertyGroup Condition="'$(TargetFramework)'=='net8.0-windows' AND '$(Configuration)|$(Platform)'=='Release|x86'">
+      <OutputPath>..\bin\Release\net8.0 x86\</OutputPath>
+      <IntermediateOutputPath>obj\Release\net8.0 x86\</IntermediateOutputPath>
+   </PropertyGroup>
+   <PropertyGroup Condition="'$(TargetFramework)'=='net8.0-windows' AND '$(Configuration)|$(Platform)'=='Release|x64'">
+      <OutputPath>..\bin\Release\net8.0 x64\</OutputPath>
+      <IntermediateOutputPath>obj\Release\net8.0 x86\</IntermediateOutputPath>
+   </PropertyGroup>
+
+   <PropertyGroup Condition="'$(TargetFramework)'=='net10.0-windows' AND '$(Configuration)|$(Platform)'=='Debug|x86'">
+      <OutputPath>..\bin\Debug\net10.0 x86\</OutputPath>
+      <IntermediateOutputPath>obj\Debug\net10.0 x86\</IntermediateOutputPath>
+   </PropertyGroup>
+   <PropertyGroup Condition="'$(TargetFramework)'=='net10.0-windows' AND '$(Configuration)|$(Platform)'=='Debug|x64'">
+      <OutputPath>..\bin\Debug\net10.0 x64\</OutputPath>
+      <IntermediateOutputPath>obj\Debug\net10.0 x86\</IntermediateOutputPath>
+   </PropertyGroup>
+   <PropertyGroup Condition="'$(TargetFramework)'=='net10.0-windows' AND '$(Configuration)|$(Platform)'=='Release|x86'">
+      <OutputPath>..\bin\Release\net10.0 x86\</OutputPath>
+      <IntermediateOutputPath>obj\Release\net10.0 x86\</IntermediateOutputPath>
+   </PropertyGroup>
+   <PropertyGroup Condition="'$(TargetFramework)'=='net10.0-windows' AND '$(Configuration)|$(Platform)'=='Release|x64'">
+      <OutputPath>..\bin\Release\net10.0 x64\</OutputPath>
+      <IntermediateOutputPath>obj\Release\net10.0 x86\</IntermediateOutputPath>
+   </PropertyGroup>
+
+   <ItemGroup>
+    <Import Include="System.Data" />
+    <Import Include="System.Drawing" />
+    <Import Include="System.Windows.Forms" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="My Project\Application.Designer.vb">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Application.myapp</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="My Project\Application.myapp">
+      <Generator>MyApplicationCodeGenerator</Generator>
+      <LastGenOutput>Application.Designer.vb</LastGenOutput>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="OpenMcdf" Version="3.1.4" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="API\" />
+  </ItemGroup>
+
+</Project>
