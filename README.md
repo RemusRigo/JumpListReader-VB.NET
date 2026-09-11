@@ -1,6 +1,6 @@
-# Jump List Reader
+# SysUnveiler
 
-A Windows utility that reads Jump List files
+A Windows analyzer/forensics  utility
 
 
 
@@ -13,13 +13,13 @@ A Windows utility that reads Jump List files
 
 ## Installation
 
-Just run JumpListReader.exe
+Just run SysUnveiler.exe
 
 
 
 ## Features
 
-* 
+* Jump List Reader
 
 
 
@@ -27,13 +27,14 @@ Just run JumpListReader.exe
 
 ![status](https://img.shields.io/badge/status-in%20progress-orange)
 <br>
-![GitHub Downloads (all assets, all releases)](https://img.shields.io/github/downloads/RemusRigo/SysOptimizer-VB.NET/total)
+![GitHub Downloads (all assets, all releases)](https://img.shields.io/github/downloads/RemusRigo/SysUnveiler-VB.NET/total)
 
 
 
 ## Roadmap
 
-* 2026-09-10: Fix: 
+* 2026-09-11: Edit: minor UI change
+* 2026-09-10: Fix: parsing of JumpLists
 * 2026-07-06: Fix: use openMCDF instead of OLE container
 * 2026-07-01: Build UI + load files
 * 2026-07-01: Project started
