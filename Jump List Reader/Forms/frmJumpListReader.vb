@@ -5,14 +5,34 @@
 '--------------------------------------------------------------------------------------------------
 
 Imports System.IO
-Imports System.Windows.Forms.VisualStyles.VisualStyleElement
+Imports JumpListReader.API
 
 Public Class frmJumpListReader
+
+   Private Const SYSMENU_ABOUT_ID As UInteger = 1000
 
    Dim log As New Logger(appName)
 
    Dim pathAD As String = Path.Combine(Environment.GetEnvironmentVariable("appdata"), "Microsoft\Windows\Recent\AutomaticDestinations")
    Dim pathCD As String = Path.Combine(Environment.GetEnvironmentVariable("appdata"), "Microsoft\Windows\Recent\CustomDestinations")
+
+   '===============================================================================================
+   Protected Overrides Sub OnHandleCreated(e As EventArgs)
+      MyBase.OnHandleCreated(e)
+      Dim hSysMenu As IntPtr = GetSystemMenu(Me.Handle, False)
+      AppendMenu(hSysMenu, MF_SEPARATOR, 0, String.Empty)
+      AppendMenu(hSysMenu, MF_STRING, SYSMENU_ABOUT_ID, "About...")
+   End Sub
+
+   '===============================================================================================
+   Protected Overrides Sub WndProc(ByRef m As Message)
+      MyBase.WndProc(m)
+      If m.Msg = WM_SYSCOMMAND Then
+         If CUInt(m.WParam) = SYSMENU_ABOUT_ID Then
+            frmAbout.ShowDialog()
+         End If
+      End If
+   End Sub
 
    '===============================================================================================
    Public Function DarkenColor(c As Color, percent As Integer) As Color
