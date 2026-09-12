@@ -14,7 +14,7 @@
       <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
       <BaseOutputPath>..\bin\</BaseOutputPath>
       <BaseIntermediateOutputPath>obj\</BaseIntermediateOutputPath>
-      <ApplicationIcon>Res\SysUnveiler.ico</ApplicationIcon>
+      <ApplicationIcon>Res\Main.ico</ApplicationIcon>
    </PropertyGroup>
 
    <PropertyGroup Condition="'$(TargetFramework)'=='net8.0-windows' AND '$(Configuration)|$(Platform)'=='Debug|x86'">
@@ -51,7 +51,7 @@
       <IntermediateOutputPath>obj\Release\net10.0 x86\</IntermediateOutputPath>
    </PropertyGroup>
    <ItemGroup>
-     <Content Include="Res\SysUnveiler.ico" />
+     <Content Include="Res\Main.ico" />
    </ItemGroup>
 
    <ItemGroup>
