@@ -19,8 +19,7 @@ Just run SysUnveiler.exe
 
 ## Statistics
 
-![status](https://img.shields.io/badge/status-in%20progress-orange)
-<br>
+![status](https://img.shields.io/badge/status-completed-brightgreen)<br>
 ![GitHub Downloads (all assets, all releases)](https://img.shields.io/github/downloads/RemusRigo/JumpListReader-VB.NET/total)
 
 
